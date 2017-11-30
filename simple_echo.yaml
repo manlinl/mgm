@@ -1,0 +1,67 @@
+# [START swagger]
+swagger: "2.0"
+info:
+  description: "A simple echo serve"
+  title: "Simple Echo"
+  version: "1.0.0"
+host: "localhost:55555"
+# [END swagger]
+basePath: "/"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+schemes:
+  - "http"
+paths:
+  "/echo":
+    post:
+      description: "Echo back a given message."
+      operationId: "echo"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+      parameters:
+        - description: "Message to echo"
+          in: body
+          name: message
+          required: true
+          schema:
+            $ref: "#/definitions/echoMessage"
+      security:
+        - api_key: []
+      x-google-quota:
+        metricCosts:
+          read-requests: 1
+definitions:
+  echoMessage:
+    properties:
+      message:
+        type: "string"
+      latency:
+        type: "integer"
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+x-google-management:
+  metrics:
+    # Define a metric for read requests.
+    - name: "read-requests"
+      displayName: "Read requests"
+      valueType: INT64
+      metricKind: DELTA
+  quota:
+    limits:
+      # Define the limit or the read-requests metric.
+      - name: "read-limit"
+        metric: "read-requests"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 100
