@@ -5,9 +5,9 @@ metadata:
   labels:
     app: echo
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-  - port: 80
+  - port: 55555
     name: http
   selector:
     app: echo
@@ -26,7 +26,9 @@ spec:
     spec:
       containers:
       - name: echo
-        image: gcr.io/istio-manlinl/echo
+        image: gcr.io/istio-manlinl/echo:v0.1
         imagePullPolicy: IfNotPresent #Always
+        command: ["/opt/echo"]
+        args: ["-alsologtostderr"]
         ports:
         - containerPort: 55555
