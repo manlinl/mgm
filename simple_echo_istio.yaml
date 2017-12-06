@@ -1,0 +1,57 @@
+apiVersion: config.istio.io/v1alpha2
+kind: HTTPAPISpec
+metadata:
+  name: echo-service
+  namespace: default
+spec:
+  apiKeys:
+  - query: key
+  attributes:
+    attributes:
+      api.service:
+        stringValue: localhost:55555
+      api.version:
+        stringValue: 1.0.0
+  patterns:
+  - attributes:
+      attributes:
+        api.operation:
+          stringValue: echo
+    httpMethod: POST
+    uriTemplate: /echo
+---
+apiVersion: config.istio.io/v1alpha2
+kind: HTTPAPISpecBinding
+metadata:
+  name: echo-service
+  namespace: default
+spec:
+  apiSpecs:
+  - name: echo-service
+  services:
+  - service: echo
+    namespace: default
+---
+apiVersion: config.istio.io/v1alpha2
+kind: QuotaSpec
+metadata:
+  name: echo-service
+  namespace: default
+spec:
+  rules:
+  - match:
+    - clause:
+        api.operation:
+          exact: echo
+---
+apiVersion: config.istio.io/v1alpha2
+kind: QuotaSpecBinding
+metadata:
+  name: echo-service
+  namespace: default
+spec:
+  quotaSpecs:
+  - name: echo-service
+  services:
+  - service: echo
+    namespace: default
