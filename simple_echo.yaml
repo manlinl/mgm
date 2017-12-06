@@ -4,7 +4,7 @@ info:
   description: "A simple echo serve"
   title: "Simple Echo"
   version: "1.0.0"
-host: "localhost:55555"
+host: "simple-echo.endpoints.istio-manlinl.cloud.goog"
 # [END swagger]
 basePath: "/"
 consumes:
