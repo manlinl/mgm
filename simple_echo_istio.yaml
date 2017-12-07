@@ -1,7 +1,8 @@
 apiVersion: config.istio.io/v1alpha2
 kind: HTTPAPISpec
 metadata:
-  name: echo-service
+  creationTimestamp: null
+  name: foobar
   namespace: default
 spec:
   apiKeys:
@@ -23,19 +24,22 @@ spec:
 apiVersion: config.istio.io/v1alpha2
 kind: HTTPAPISpecBinding
 metadata:
-  name: echo-service
+  creationTimestamp: null
+  name: foobar
   namespace: default
 spec:
   apiSpecs:
-  - name: echo-service
+  - name: foobar
+    namespace: default
   services:
-  - service: echo
+  - name: foo
     namespace: default
 ---
 apiVersion: config.istio.io/v1alpha2
 kind: QuotaSpec
 metadata:
-  name: echo-service
+  creationTimestamp: null
+  name: foobar
   namespace: default
 spec:
   rules:
@@ -43,15 +47,20 @@ spec:
     - clause:
         api.operation:
           exact: echo
+    quotas:
+    - charge: "1"
+      quota: read-requests
 ---
 apiVersion: config.istio.io/v1alpha2
 kind: QuotaSpecBinding
 metadata:
-  name: echo-service
+  creationTimestamp: null
+  name: foobar
   namespace: default
 spec:
   quotaSpecs:
-  - name: echo-service
+  - name: foobar
+    namespace: default
   services:
-  - service: echo
+  - name: foo
     namespace: default
