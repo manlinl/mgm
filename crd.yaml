@@ -1,0 +1,32 @@
+kind: CustomResourceDefinition
+apiVersion: apiextensions.k8s.io/v1beta1
+metadata:
+  name: svcctrlreports.config.istio.io
+  labels:
+    package: svcctrlreport
+    istio: mixer-instance
+spec:
+  group: config.istio.io
+  names:
+    kind: svcctrlreport
+    plural: svcctrlreports
+    singular: svcctrlreport
+  scope: Namespaced
+  version: v1alpha2
+---
+kind: CustomResourceDefinition
+apiVersion: apiextensions.k8s.io/v1beta1
+metadata:
+  name: apikeys.config.istio.io
+  labels:
+    package: apikey
+    istio: apikey-instance
+spec:
+  group: config.istio.io
+  names:
+    kind: apikey
+    plural: apikeys
+    singular: apikey
+  scope: Namespaced
+  version: v1alpha2
+---
