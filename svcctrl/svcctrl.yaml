@@ -7,7 +7,7 @@ spec:
   runtime_config:
     check_cache_size: 200
     check_result_expiration: 60s
-  credential_path: "token.json"
+  credential_path: "/etc/token/token.json"
   service_configs:
     - mesh_service_name: "echo.default.svc.cluster.local"
       google_service_name: "simple-echo.endpoints.istio-manlinl.cloud.goog"
@@ -34,7 +34,7 @@ metadata:
   name: report
   namespace: istio-system
 spec:
-  api_version : api.version | ""
+  api_version : '"v1"'
   api_operation : api.operation | ""
   api_protocol : api.protocol | ""
   api_service : api.service | ""
