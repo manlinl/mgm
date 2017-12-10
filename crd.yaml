@@ -20,7 +20,7 @@ metadata:
   name: apikeys.config.istio.io
   labels:
     package: apikey
-    istio: apikey-instance
+    istio: mixer-instance
 spec:
   group: config.istio.io
   names:
