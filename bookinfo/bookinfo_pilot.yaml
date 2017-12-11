@@ -1,0 +1,38 @@
+apiVersion: config.istio.io/v1alpha2
+kind: HTTPAPISpec
+metadata:
+  creationTimestamp: null
+  name: productpage
+  namespace: default
+spec:
+  apiKeys:
+  - query: key
+  attributes:
+    attributes:
+      api.service:
+        stringValue: bookinfo.endpoints.istio-manlinl.cloud.goog
+      api.version:
+        stringValue: 1.0.0
+  patterns:
+  - attributes:
+      attributes:
+        api.operation:
+          stringValue: getProducts
+    httpMethod: GET
+    uriTemplate: /products
+---
+apiVersion: config.istio.io/v1alpha2
+kind: HTTPAPISpecBinding
+metadata:
+  creationTimestamp: null
+  name: productpage
+  namespace: default
+spec:
+  apiSpecs:
+  - name: productpage
+    namespace: default
+  services:
+  - name: productpage
+    namespace: default
+---
+
