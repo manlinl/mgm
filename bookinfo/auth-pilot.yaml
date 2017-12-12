@@ -1,0 +1,25 @@
+apiVersion: config.istio.io/v1alpha2
+kind: EndUserAuthenticationPolicy
+metadata:
+  name: productpage
+  namespace: default
+spec:
+  jwts:
+  - issuer: "https://accounts.google.com"
+    audiences:
+      - 269356943445-7tujg7fu0f7pqurl8cs4ev61uvll01i3.apps.googleusercontent.com
+    jwksUri: https://www.googleapis.com/oauth2/v3/certs
+---
+apiVersion: config.istio.io/v1alpha2
+kind: EndUserAuthenticationPolicyBinding
+metadata:
+  name: productpage
+  namespace: default
+spec:
+  policies:
+  - name: productpage
+    namespace: default
+  services:
+  - name: productpage
+    namespace: default
+---
