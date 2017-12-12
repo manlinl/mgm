@@ -5,10 +5,10 @@ metadata:
   namespace: default
 spec:
   jwts:
-  - issuer: "accounts.google.com"
+  - issuer: accounts.google.com
     audiences:
     - 269356943445-7tujg7fu0f7pqurl8cs4ev61uvll01i3.apps.googleusercontent.com
-    jwksUri: https://www.googleapis.com/oauth2/v3/certs
+    jwks_uri: https://www.googleapis.com/oauth2/v3/certs
 ---
 apiVersion: config.istio.io/v1alpha2
 kind: EndUserAuthenticationPolicySpecBinding
