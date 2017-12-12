@@ -1,0 +1,58 @@
+swagger: "2.0"
+info:
+  description: "This is the API of the Istio BookInfo sample application."
+  version: "v1"
+  title: "BookInfo API"
+  termsOfService: "https://istio.io/"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "bookinfo.endpoints.istio-manlinl.cloud.goog"
+basePath: "/api/v1"
+tags:
+- name: "product"
+  description: "Information about a product (in this case a book)"
+- name: "review"
+  description: "Review information for a product"
+- name: "rating"
+  description: "Rating information for a product"
+externalDocs:
+  description: "Learn more about the Istio BookInfo application"
+  url: "https://istio.io/docs/samples/bookinfo.html"
+paths:
+  /productpage:
+    get:
+      tags:
+      - "product"
+      summary: "List all products"
+      description: "List all products available in the application with a minimum amount of information."
+      operationId: "getProducts"
+      responses:
+        200:
+          description: "successful operation"
+      security:
+        - api_key: []
+      x-google-quota:
+        metricCosts:
+          read-requests: 1
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+x-google-management:
+  metrics:
+    # Define a metric for read requests.
+    - name: "read-requests"
+      displayName: "Read requests"
+      valueType: INT64
+      metricKind: DELTA
+  quota:
+    limits:
+      # Define the limit or the read-requests metric.
+      - name: "read-limit"
+        metric: "read-requests"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 100

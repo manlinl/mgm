@@ -12,7 +12,7 @@ spec:
     - mesh_service_name: "echo.default.svc.cluster.local"
       google_service_name: "simple-echo.endpoints.istio-manlinl.cloud.goog"
       quotas:
-        - name: ratelimit.quota.istio-system
+        - name: read-requests.quota.istio-system
           google_quota_metric_name: read-requests
           expiration: 1m
 ---
@@ -23,7 +23,7 @@ metadata:
   namespace: istio-system
 spec:
   api: api.service | ""
-  api_version: '"v1"'
+  api_version: api.version | ""
   api_operation : api.operation
   api_key : request.api_key
   timestamp : request.time
@@ -51,7 +51,7 @@ spec:
 apiVersion: "config.istio.io/v1alpha2"
 kind: quota
 metadata:
-  name: ratelimit
+  name: read-requests
   namespace: istio-system
 spec:
   dimensions:
@@ -70,4 +70,4 @@ spec:
     instances:
     - check.apikey
     - report.svcctrlreport
-    - ratelimit.quota
+    - read-requests.quota

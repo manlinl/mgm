@@ -12,7 +12,7 @@ spec:
       api.service:
         stringValue: simple-echo.endpoints.istio-manlinl.cloud.goog
       api.version:
-        stringValue: 1.0.0
+        stringValue: v1
   patterns:
   - attributes:
       attributes:

@@ -60,7 +60,7 @@ x-google-management:
   quota:
     limits:
       # Define the limit or the read-requests metric.
-      - name: "read-limit"
+      - name: "read-requests"
         metric: "read-requests"
         unit: "1/min/{project}"
         values:
