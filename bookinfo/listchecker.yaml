@@ -1,0 +1,27 @@
+apiVersion: "config.istio.io/v1alpha2"
+kind: listchecker
+metadata:
+  name: authz
+  namespace: istio-system
+spec:
+  overrides: ["p1", "p2"]  # overrides provide a static list
+  blacklist: false
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: listentry
+metadata:
+  name: principal
+  namespace: istio-system
+spec:
+  value: request.auth.principal
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: rule
+metadata:
+  name: authz-rule
+  namespace: istio-system
+spec:
+  actions:
+  - handler: staticversion.listchecker
+    instances:
+    - principal.listentry
