@@ -21,7 +21,8 @@ metadata:
   name: authz-rule
   namespace: istio-system
 spec:
+  match: destination.service == "productpage.default.svc.cluster.local"
   actions:
-  - handler: staticversion.listchecker
+  - handler: authz.listchecker
     instances:
     - principal.listentry
