@@ -1,5 +1,5 @@
 apiVersion: "config.istio.io/v1alpha2"
-kind: svcctrl
+kind: servicecontrol
 metadata:
   name: testhandler
   namespace: istio-system
@@ -29,7 +29,7 @@ spec:
   timestamp : request.time
 ---
 apiVersion: "config.istio.io/v1alpha2"
-kind: svcctrlreport
+kind: servicecontrolreport
 metadata:
   name: report
   namespace: istio-system
@@ -61,13 +61,13 @@ spec:
 apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
-  name: svcctrl-rule
+  name: servicecontrol-rule
   namespace: istio-system
 spec:
   match: destination.service == "echo.default.svc.cluster.local"
   actions:
-  - handler: testhandler.svcctrl
+  - handler: testhandler.servicecontrol
     instances:
     - check.apikey
-    - report.svcctrlreport
+    - report.servicecontrolreport
     - read-requests.quota
